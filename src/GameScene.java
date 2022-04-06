@@ -57,11 +57,8 @@ public class GameScene extends JPanel {
                 if (this.ball.getYLocation()==this.stadium.getBoundY()+5){
                     this.ball.dribble(this.player.legsX(), this.player.legsY());
                     shoot=false;
+                    this.ball.setDirection(Ball.NONE);
                 }
-
-
-
-
                 repaint();
                 try {
                     Thread.sleep(7);
