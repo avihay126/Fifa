@@ -44,10 +44,15 @@ public static final int HEAD_WIDTH=10,HEAD_HEIGHT=10,LEG_WIDTH=6,SHOULDERS_HEIGH
         return direction;
     }
 
+    public int getBodyWidth(){
+        return this.body.getWidth();
+    }
+
 
     public int getLocation(){
         return this.body.getX();
     }
+
     public int legsX(){
         return this.leftLeg.getX()+this.leftLeg.getWidth();
     }

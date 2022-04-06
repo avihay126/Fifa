@@ -1,7 +1,7 @@
 import javax.swing.*;
 
 public class Window extends JFrame {
-    public static final int WIN_WID = 700, WIN_HEI = 500;
+    public static final int WIN_WID = 900, WIN_HEI = 700;
 
     public static void main(String[] args) {
         Window window = new Window();
