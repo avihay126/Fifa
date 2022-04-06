@@ -18,13 +18,11 @@ public class GameScene extends JPanel {
         this.setDoubleBuffered(true);
         int o = random.nextInt(600);
         int d = 340;
-
         this.stadium = new Stadium();
         this.stadium.goalMovement();
         this.player = new Player(o, d);
         this.ball = new Ball(this.player.legsX(), this.player.legsY());
         this.gameLoop();
-
 
     }
 

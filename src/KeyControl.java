@@ -21,11 +21,9 @@ public class KeyControl implements KeyListener {
         switch (e.getKeyCode()){
             case KeyEvent.VK_RIGHT:
                 this.player.setDirection(Player.RIGHT);
-                System.out.println("hello");
                 break;
             case KeyEvent.VK_LEFT:
                 this.player.setDirection(Player.LEFT);
-                System.out.println("world");
                 break;
             case KeyEvent.VK_UP:
                 this.ball.setDirection(Ball.UP);
