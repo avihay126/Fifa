@@ -35,6 +35,7 @@ public class Rectangle {
         }else {
             graphics.drawRect(this.x, this.y, this.width, this.height);
         }
+
     }
 
 

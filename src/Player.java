@@ -6,7 +6,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 
-public class Player implements KeyListener {
+public class Player  {
 
 public static final int HEAD_WIDTH=10,HEAD_HEIGHT=10,LEG_WIDTH=6,SHOULDERS_HEIGHT=4,HAND_WIDTH=5,NECK_MARGIN=2,
         BODY_MARGIN=3,SHOULDERS_MARGIN=5,NONE=0,RIGHT=1,LEFT=2;
@@ -44,24 +44,15 @@ public static final int HEAD_WIDTH=10,HEAD_HEIGHT=10,LEG_WIDTH=6,SHOULDERS_HEIGH
         return direction;
     }
 
-    @Override
-    public void keyTyped(KeyEvent e) {
-
+    public int getBodyWidth(){
+        return this.body.getWidth();
     }
 
-    @Override
-    public void keyPressed(KeyEvent e) {
-
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-
-    }
 
     public int getLocation(){
         return this.body.getX();
     }
+
     public int legsX(){
         return this.leftLeg.getX()+this.leftLeg.getWidth();
     }
