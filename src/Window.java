@@ -18,5 +18,4 @@ public class Window extends JFrame {
         this.add(gameScene);
     }
 
-
 }

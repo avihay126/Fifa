@@ -1,14 +1,13 @@
 import javax.imageio.plugins.tiff.GeoTIFFTagSet;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.geom.Line2D;
 
 
 public class Stadium extends JPanel {
 
     public static final int BOUND_X = 10, BOUND_Y = 20, BOUND_WIDTH = 670, BOUND_HEIGHT = 440,
             KEEPER_WIDTH = 120, KEEPER_HEIGHT = 50, KEEPER_MARGIN = 50, OVAL_16_HEIGHT = 50, OVAL_16_MARGIN = 10, HALF_OVAL_HEIGHT = 170,
-            CORNER_WIDTH = 10, GOAL_MARGIN = 15,BOUND_Y_FLAG = 2,WIDTH_FLAG=20,HEIGHT_FLAG=20;
+            CORNER_WIDTH = 10, GOAL_MARGIN = 15, BOUND_Y_FLAG = 2, WIDTH_FLAG = 20, HEIGHT_FLAG = 20;
     private Rectangle bounds;
     private Rectangle goalKeeper;
     private Rectangle plaza16;
@@ -35,7 +34,7 @@ public class Stadium extends JPanel {
         this.leftCorner = new Oval(bounds.getX(), BOUND_Y, CORNER_WIDTH, CORNER_WIDTH, 90, -270, Color.white, false);
         this.rightCorner = new Oval(BOUND_X + BOUND_WIDTH - CORNER_WIDTH, BOUND_Y, CORNER_WIDTH, CORNER_WIDTH, 90, 270, Color.white, false);
         this.goal = new Rectangle(this.goalKeeper.getX() + GOAL_MARGIN, BOUND_Y - GOAL_MARGIN, this.goalKeeper.getWidth() - (GOAL_MARGIN * 2), GOAL_MARGIN, Color.white, false);
-        this.scoreBoard = new Rectangle(BOUND_X, BOUND_HEIGHT-30, 200, 50, Color.blue, true);
+        this.scoreBoard = new Rectangle(BOUND_X, BOUND_HEIGHT - 30, 200, 50, Color.blue, true);
         this.leftFlag = new ImageIcon("left flag.png");
         this.rightFlag = new ImageIcon("right flag.png");
 //        this.drawScoreBoard();
