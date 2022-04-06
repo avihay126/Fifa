@@ -32,7 +32,10 @@ public class KeyControl implements KeyListener {
                 break;
         }
     }
+    public void gvhb()
+    {
 
+    }
     @Override
     public void keyReleased(KeyEvent e) {
 
