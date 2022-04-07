@@ -20,6 +20,7 @@ public class Stadium extends JPanel {
     private Rectangle scoreBoard;
     private ImageIcon leftFlag;
     private ImageIcon rightFlag;
+    private ImageIcon CrowdAshkelon;
     private int speedGame;
 //    private JLabel nameUser;
 
@@ -38,6 +39,7 @@ public class Stadium extends JPanel {
         this.scoreBoard = new Rectangle(BOUND_X, BOUND_HEIGHT - 30, 200, 50, Color.blue, true);
         this.leftFlag = new ImageIcon("left flag.png");
         this.rightFlag = new ImageIcon("right flag.png");
+        this.CrowdAshkelon = new ImageIcon("crwod Ashkelon.png");
         this.speedGame=START_GOAL_SPEED;
 //        this.drawScoreBoard();
     }
@@ -122,6 +124,7 @@ public class Stadium extends JPanel {
         this.scoreBoard.paint(graphics);
         graphics.drawImage(rightFlag.getImage(), BOUND_X, BOUND_Y_FLAG, WIDTH_FLAG, HEIGHT_FLAG, null);
         graphics.drawImage(leftFlag.getImage(), BOUND_WIDTH , BOUND_Y_FLAG, WIDTH_FLAG, HEIGHT_FLAG, null);
+        graphics.drawImage(CrowdAshkelon.getImage(), 0,0,900,42,null);
     }
 }
 
