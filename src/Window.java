@@ -15,7 +15,7 @@ public class Window extends JFrame {
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setLayout(null);
-        this.setTitle("The fast gate");
+        this.setTitle("The fast gate by A.I.U.A");
         GameScene gameScene = new GameScene(0, 0, WIN_WID , WIN_HEI);
         this.add(gameScene);
     }
