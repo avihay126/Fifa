@@ -19,6 +19,7 @@ public class Window extends JFrame {
         GameScene gameScene = new GameScene(0, 0, WIN_WID , WIN_HEI);
         this.add(gameScene);
 
+
     }
 
 }

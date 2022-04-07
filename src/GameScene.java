@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class GameScene extends JPanel {
 
-public static final int GAME_SPEED=6;
+    public static final int GAME_SPEED = 6;
     private Player player;
     private Stadium stadium;
     private Ball ball;
@@ -15,9 +15,9 @@ public static final int GAME_SPEED=6;
         this.setLayout(null);
         this.setBounds(x, y, width, height);
         this.setDoubleBuffered(true);
-        BackSound backSound=new BackSound();
+        BackSound backSound = new BackSound();
         this.stadium = new Stadium();
-        this.player = new Player(this.getX()+this.getWidth()/2, this.getY()+this.getHeight()/2);
+        this.player = new Player(this.getX() + this.getWidth() / 2, this.getY() + this.getHeight() / 2);
         this.ball = new Ball(this.player.legsX(), this.player.legsY());
         this.stadium.goalMovement(this.ball);
         this.gameLoop();
@@ -37,9 +37,9 @@ public static final int GAME_SPEED=6;
                         this.player.moveLeft();
                         break;
                 }
-                if (this.player.getLocation()==this.stadium.getBoundX()+this.stadium.getBoundWidth()-this.player.getBodyWidth()){
+                if (this.player.getLocation() == this.stadium.getBoundX() + this.stadium.getBoundWidth() - this.player.getBodyWidth()) {
                     this.player.moveLeft();
-                }else if(this.player.getLocation()==this.stadium.getBoundX()){
+                } else if (this.player.getLocation() == this.stadium.getBoundX()) {
                     this.player.moveRight();
                 }
                 if (!shoot) {
@@ -53,7 +53,7 @@ public static final int GAME_SPEED=6;
                     shoot = false;
                     this.ball.setDirection(Ball.NONE);
                 }
-                if (this.ball.getYLocation()==this.stadium.getBoundY()&&(this.ball.getXLocation()>this.stadium.getGoalX()&&this.ball.getXLocation()<this.stadium.getGoalX()+this.stadium.getGoalWidth())){
+                if (this.ball.getYLocation() == this.stadium.getBoundY() && (this.ball.getXLocation() > this.stadium.getGoalX() && this.ball.getXLocation() < this.stadium.getGoalX() + this.stadium.getGoalWidth())) {
                     System.out.println("goal");
                 }
                 repaint();
@@ -75,7 +75,7 @@ public static final int GAME_SPEED=6;
     }
 
     public void paintComponent(Graphics g) {
-        Graphics2D graphics=(Graphics2D) g;
+        Graphics2D graphics = (Graphics2D) g;
         graphics.setStroke(new BasicStroke(3));
         super.paintComponent(g);
         this.stadium.paint(g);
