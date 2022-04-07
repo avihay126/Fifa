@@ -7,7 +7,7 @@ public class Stadium extends JPanel {
 
     public static final int BOUND_X = 20, BOUND_Y = 80, BOUND_WIDTH = 850, BOUND_HEIGHT = 570,
             KEEPER_WIDTH = 200, KEEPER_HEIGHT = 80, KEEPER_MARGIN = 90, OVAL_16_HEIGHT = 100, OVAL_16_MARGIN = 20, HALF_OVAL_HEIGHT = 200,
-            CORNER_WIDTH = 10, GOAL_MARGIN = 15, BOUND_Y_FLAG = BOUND_Y-40, WIDTH_FLAG = 20, HEIGHT_FLAG = 40;
+            CORNER_WIDTH = 10, GOAL_MARGIN = 15,WIDTH_FLAG = 20, HEIGHT_FLAG = 40, BOUND_Y_FLAG = BOUND_Y-(WIDTH_FLAG)*2;
     private Rectangle bounds;
     private Rectangle goalKeeper;
     private Rectangle plaza16;
