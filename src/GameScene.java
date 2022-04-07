@@ -15,6 +15,7 @@ public static final int GAME_SPEED=6;
         this.setLayout(null);
         this.setBounds(x, y, width, height);
         this.setDoubleBuffered(true);
+        BackSound backSound=new BackSound();
         this.stadium = new Stadium();
         this.player = new Player(this.getX()+this.getWidth()/2, this.getY()+this.getHeight()/2);
         this.ball = new Ball(this.player.legsX(), this.player.legsY());
