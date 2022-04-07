@@ -80,7 +80,7 @@ public class GameScene extends JPanel {
 
     public void paintComponent(Graphics g) {
         Graphics2D graphics=(Graphics2D) g;
-        graphics.setStroke(new BasicStroke(5));
+        graphics.setStroke(new BasicStroke(3));
         super.paintComponent(g);
         this.stadium.paint(g);
         this.ball.paint(g);
