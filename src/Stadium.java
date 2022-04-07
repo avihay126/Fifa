@@ -5,9 +5,9 @@ import java.awt.*;
 
 public class Stadium extends JPanel {
 
-    public static final int BOUND_X = 10, BOUND_Y = 20, BOUND_WIDTH = 870, BOUND_HEIGHT = 640,
+    public static final int BOUND_X = 20, BOUND_Y = 80, BOUND_WIDTH = 850, BOUND_HEIGHT = 570,
             KEEPER_WIDTH = 200, KEEPER_HEIGHT = 80, KEEPER_MARGIN = 90, OVAL_16_HEIGHT = 100, OVAL_16_MARGIN = 20, HALF_OVAL_HEIGHT = 200,
-            CORNER_WIDTH = 10, GOAL_MARGIN = 15, BOUND_Y_FLAG = 2, WIDTH_FLAG = 20, HEIGHT_FLAG = 20;
+            CORNER_WIDTH = 10, GOAL_MARGIN = 15, BOUND_Y_FLAG = BOUND_Y-18, WIDTH_FLAG = 20, HEIGHT_FLAG = 20;
     private Rectangle bounds;
     private Rectangle goalKeeper;
     private Rectangle plaza16;
@@ -113,7 +113,7 @@ public class Stadium extends JPanel {
         this.goal.paint(graphics);
         this.scoreBoard.paint(graphics);
         graphics.drawImage(rightFlag.getImage(), BOUND_X, BOUND_Y_FLAG, WIDTH_FLAG, HEIGHT_FLAG, null);
-        graphics.drawImage(leftFlag.getImage(), BOUND_WIDTH - BOUND_X, BOUND_Y_FLAG, WIDTH_FLAG, HEIGHT_FLAG, null);
+        graphics.drawImage(leftFlag.getImage(), BOUND_WIDTH , BOUND_Y_FLAG, WIDTH_FLAG, HEIGHT_FLAG, null);
     }
 }
 
