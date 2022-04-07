@@ -55,6 +55,8 @@ public class GameScene extends JPanel {
                 }
                 if (this.ball.getYLocation() == this.stadium.getBoundY() && (this.ball.getXLocation() > this.stadium.getGoalX() && this.ball.getXLocation() < this.stadium.getGoalX() + this.stadium.getGoalWidth())) {
                     System.out.println("goal");
+                }else if (this.ball.getYLocation()==this.stadium.getBoundY()&&(this.ball.getXLocation()<this.stadium.getGoalX()||this.ball.getXLocation()>this.stadium.getGoalX()+this.stadium.getGoalWidth())){
+                    System.out.println("Missed");
                 }
                 repaint();
                 try {
