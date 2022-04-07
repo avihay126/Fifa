@@ -8,13 +8,14 @@ public class Window extends JFrame {
     }
 
     public Window() {
+        ImageIcon pibBar=new ImageIcon("pic_game.jpeg");
         this.setVisible(true);
         this.setSize(WIN_WID, WIN_HEI);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setLayout(null);
-
+        this.setTitle("The fast gate by A.I.U.A");
         GameScene gameScene = new GameScene(0, 0, WIN_WID , WIN_HEI);
         this.add(gameScene);
     }
