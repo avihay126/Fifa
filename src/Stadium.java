@@ -1,4 +1,3 @@
-import javax.imageio.plugins.tiff.GeoTIFFTagSet;
 import javax.swing.*;
 import java.awt.*;
 
@@ -7,7 +6,8 @@ public class Stadium extends JPanel {
 
     public static final int BOUND_X = 20, BOUND_Y = 80, BOUND_WIDTH = 850, BOUND_HEIGHT = 570,
             KEEPER_WIDTH = 200, KEEPER_HEIGHT = 80, KEEPER_MARGIN = 90, OVAL_16_HEIGHT = 100, OVAL_16_MARGIN = 20, HALF_OVAL_HEIGHT = 200,
-            CORNER_WIDTH = 10, GOAL_MARGIN = 25,WIDTH_FLAG = 20, HEIGHT_FLAG = 40, BOUND_Y_FLAG = BOUND_Y-(WIDTH_FLAG)*2;
+            CORNER_WIDTH = 10, GOAL_MARGIN = 25,WIDTH_FLAG = 20, HEIGHT_FLAG = 40, BOUND_Y_FLAG = BOUND_Y-(WIDTH_FLAG)*2,START_GOAL_SPEED=21,
+            REDUCE_SPEED=3,MAX_SPEED=4,CORNER_START_ANGLE=90,CORNER_END_ANGLE=270, OVAL_START =0, OVAL_END =180,PENALTY_SIZE=4;
     private Rectangle bounds;
     private Rectangle goalKeeper;
     private Rectangle plaza16;
@@ -20,6 +20,7 @@ public class Stadium extends JPanel {
     private Rectangle scoreBoard;
     private ImageIcon leftFlag;
     private ImageIcon rightFlag;
+    private int speedGame;
 //    private JLabel nameUser;
 
 
@@ -28,19 +29,20 @@ public class Stadium extends JPanel {
         this.bounds = new Rectangle(BOUND_X, BOUND_Y, BOUND_WIDTH, BOUND_HEIGHT, Color.white, false);
         this.goalKeeper = new Rectangle(BOUND_X + BOUND_WIDTH / 2 - KEEPER_WIDTH / 2, BOUND_Y, KEEPER_WIDTH, KEEPER_HEIGHT, Color.white, false);
         this.plaza16 = new Rectangle(this.goalKeeper.getX() - KEEPER_MARGIN, this.bounds.getY(), this.goalKeeper.getWidth() + (KEEPER_MARGIN * 2), KEEPER_HEIGHT * 2, Color.white, false);
-        this.oval16 = new Oval(this.goalKeeper.getX() + OVAL_16_MARGIN, BOUND_Y + this.plaza16.getHeight() - (OVAL_16_HEIGHT / 2), this.goalKeeper.getWidth() - (OVAL_16_MARGIN * 2), OVAL_16_HEIGHT, 0, -180, Color.white, false);
-        this.halfOval = new Oval(this.plaza16.getX(), BOUND_Y + BOUND_HEIGHT - (HALF_OVAL_HEIGHT / 2), this.plaza16.getWidth(), HALF_OVAL_HEIGHT, 0, 180, Color.white, false);
-        this.elevenPoint = new Oval(this.goalKeeper.getX() + this.goalKeeper.getWidth() / 2, (this.goalKeeper.getY() + this.goalKeeper.getHeight() + this.plaza16.getY() + this.plaza16.getHeight()) / 2, 3, 3, 0, 360, Color.white, true);
-        this.leftCorner = new Oval(bounds.getX(), BOUND_Y, CORNER_WIDTH, CORNER_WIDTH, 90, -270, Color.white, false);
-        this.rightCorner = new Oval(BOUND_X + BOUND_WIDTH - CORNER_WIDTH, BOUND_Y, CORNER_WIDTH, CORNER_WIDTH, 90, 270, Color.white, false);
+        this.oval16 = new Oval(this.goalKeeper.getX() + OVAL_16_MARGIN, BOUND_Y + this.plaza16.getHeight() - (OVAL_16_HEIGHT / 2), this.goalKeeper.getWidth() - (OVAL_16_MARGIN * 2), OVAL_16_HEIGHT, OVAL_START, -OVAL_END, Color.white, false);
+        this.halfOval = new Oval(this.plaza16.getX(), BOUND_Y + BOUND_HEIGHT - (HALF_OVAL_HEIGHT / 2), this.plaza16.getWidth(), HALF_OVAL_HEIGHT, OVAL_START, OVAL_END, Color.white, false);
+        this.elevenPoint = new Oval(this.goalKeeper.getX() + this.goalKeeper.getWidth() / 2, (this.goalKeeper.getY() + this.goalKeeper.getHeight() + this.plaza16.getY() + this.plaza16.getHeight()) / 2, PENALTY_SIZE, PENALTY_SIZE, OVAL_START, OVAL_END*2, Color.white, true);
+        this.leftCorner = new Oval(bounds.getX(), BOUND_Y, CORNER_WIDTH, CORNER_WIDTH, CORNER_START_ANGLE, -CORNER_END_ANGLE, Color.white, false);
+        this.rightCorner = new Oval(BOUND_X + BOUND_WIDTH - CORNER_WIDTH, BOUND_Y, CORNER_WIDTH, CORNER_WIDTH, CORNER_START_ANGLE, CORNER_END_ANGLE, Color.white, false);
         this.goal = new Rectangle(this.goalKeeper.getX() + GOAL_MARGIN, BOUND_Y - GOAL_MARGIN, this.goalKeeper.getWidth() - (GOAL_MARGIN * 2), GOAL_MARGIN, Color.white, false);
         this.scoreBoard = new Rectangle(BOUND_X, BOUND_HEIGHT - 30, 200, 50, Color.blue, true);
         this.leftFlag = new ImageIcon("left flag.png");
         this.rightFlag = new ImageIcon("right flag.png");
+        this.speedGame=START_GOAL_SPEED;
 //        this.drawScoreBoard();
     }
 
-    public void goalMovement(int speed) {
+    public void goalMovement(Ball ball) {
         Thread t2 = new Thread(() -> {
             boolean goalMovement = true;
             while (true) {
@@ -54,9 +56,18 @@ public class Stadium extends JPanel {
                 } else if (this.goal.getX() == BOUND_X) {
                     goalMovement = true;
                 }
+                if (ball.getYLocation()==this.getBoundY()&&
+                        (ball.getXLocation()>this.getGoalX()&&ball.getXLocation()<this.getGoalX()+this.getGoalWidth())){
+                    if (speedGame>REDUCE_SPEED*2){
+                        speedGame-=REDUCE_SPEED;
+                    }else if (speedGame==REDUCE_SPEED*2){
+                        speedGame=MAX_SPEED;
+                    }
+                }
                 try {
                     repaint();
-                    Thread.sleep(speed);
+                    Thread.sleep(speedGame);
+
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -64,9 +75,6 @@ public class Stadium extends JPanel {
         });
         t2.start();
     }
-
-
-
 
     public int setGoalY() {
         return this.goal.getY()  ;

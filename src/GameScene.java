@@ -4,11 +4,10 @@ import java.util.Random;
 
 public class GameScene extends JPanel {
 
-
+public static final int GAME_SPEED=6;
     private Player player;
     private Stadium stadium;
     private Ball ball;
-    private static int speedGame;
 
 
     public GameScene(int x, int y, int width, int height) {
@@ -16,11 +15,10 @@ public class GameScene extends JPanel {
         this.setLayout(null);
         this.setBounds(x, y, width, height);
         this.setDoubleBuffered(true);
-        this.speedGame=15;
         this.stadium = new Stadium();
-        this.stadium.goalMovement(speedGame);
         this.player = new Player(this.getX()+this.getWidth()/2, this.getY()+this.getHeight()/2);
         this.ball = new Ball(this.player.legsX(), this.player.legsY());
+        this.stadium.goalMovement(this.ball);
         this.gameLoop();
 
     }
@@ -30,7 +28,6 @@ public class GameScene extends JPanel {
             keyControl();
             boolean shoot = false;
             while (true) {
-
                 switch (this.player.getDirection()) {
                     case Player.RIGHT:
                         this.player.moveRight();
@@ -56,13 +53,11 @@ public class GameScene extends JPanel {
                     this.ball.setDirection(Ball.NONE);
                 }
                 if (this.ball.getYLocation()==this.stadium.getBoundY()&&(this.ball.getXLocation()>this.stadium.getGoalX()&&this.ball.getXLocation()<this.stadium.getGoalX()+this.stadium.getGoalWidth())){
-                    this.speedGame-=2;
                     System.out.println("goal");
-
                 }
                 repaint();
                 try {
-                    Thread.sleep(5);
+                    Thread.sleep(GAME_SPEED);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
