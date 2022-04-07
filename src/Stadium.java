@@ -5,8 +5,8 @@ import java.awt.*;
 
 public class Stadium extends JPanel {
 
-    public static final int BOUND_X = 10, BOUND_Y = 20, BOUND_WIDTH = 670, BOUND_HEIGHT = 440,
-            KEEPER_WIDTH = 120, KEEPER_HEIGHT = 50, KEEPER_MARGIN = 50, OVAL_16_HEIGHT = 50, OVAL_16_MARGIN = 10, HALF_OVAL_HEIGHT = 170,
+    public static final int BOUND_X = 10, BOUND_Y = 20, BOUND_WIDTH = 870, BOUND_HEIGHT = 640,
+            KEEPER_WIDTH = 200, KEEPER_HEIGHT = 80, KEEPER_MARGIN = 90, OVAL_16_HEIGHT = 100, OVAL_16_MARGIN = 20, HALF_OVAL_HEIGHT = 200,
             CORNER_WIDTH = 10, GOAL_MARGIN = 15, BOUND_Y_FLAG = 2, WIDTH_FLAG = 20, HEIGHT_FLAG = 20;
     private Rectangle bounds;
     private Rectangle goalKeeper;
@@ -40,35 +40,56 @@ public class Stadium extends JPanel {
 //        this.drawScoreBoard();
     }
 
-    public void goalMovement() {
+    public void goalMovement(int speed) {
         Thread t2 = new Thread(() -> {
-            boolean flag = true;
-            do {
-                try {
+            boolean goalMovement = true;
+            while (true) {
+                if (goalMovement) {
                     this.goal.moveRight();
-                    if (this.goal.getX() == BOUND_X + BOUND_WIDTH - this.goal.getWidth()) {
-                        flag = false;
-                        while (!flag) {
-                            this.goal.moveLeft();
-                            Thread.sleep(10);
-                            if (this.goal.getX() == BOUND_X) {
-                                flag = true;
-                            }
-                        }
-                    }
+                } else {
+                    this.goal.moveLeft();
+                }
+                if (this.goal.getX() == BOUND_X + BOUND_WIDTH - this.goal.getWidth()) {
+                    goalMovement = false;
+                } else if (this.goal.getX() == BOUND_X) {
+                    goalMovement = true;
+                }
+                try {
                     repaint();
-                    Thread.sleep(10);
+                    Thread.sleep(speed);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-
-            } while (flag);
+            }
         });
         t2.start();
     }
 
+
+
+
+    public int setGoalY() {
+        return this.goal.getY()  ;
+    }
+
+
     public int getBoundY() {
         return this.bounds.getY();
+    }
+
+    public int getBoundX() {
+        return this.bounds.getX();
+    }
+
+    public int getBoundWidth() {
+        return this.bounds.getWidth();
+    }
+    public int getGoalX(){
+        return this.goal.getX();
+    }
+
+    public int getGoalWidth(){
+        return this.goal.getWidth();
     }
 
 //    private void drawScoreBoard(){
