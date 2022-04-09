@@ -127,4 +127,3 @@ public class Stadium extends JPanel {
         graphics.drawImage(CrowdAshkelon.getImage(), 0,0,900,42,null);
     }
 }
-

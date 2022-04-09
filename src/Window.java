@@ -1,14 +1,15 @@
 import javax.swing.*;
+import java.awt.*;
 
 public class Window extends JFrame {
     public static final int WIN_WID = 900, WIN_HEI = 700;
 
     public static void main(String[] args) {
         Window window = new Window();
+
     }
 
     public Window() {
-        ImageIcon pibBar=new ImageIcon("pic_game.jpeg");
         this.setVisible(true);
         this.setSize(WIN_WID, WIN_HEI);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -17,9 +18,10 @@ public class Window extends JFrame {
         this.setLayout(null);
         this.setTitle("The fast gate by A.I.U.A");
         GameScene gameScene = new GameScene(0, 0, WIN_WID , WIN_HEI);
-        this.add(gameScene);
+      add(gameScene);
 
 
     }
+
 
 }
