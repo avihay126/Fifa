@@ -16,10 +16,10 @@ public class BackSound {
             clip.open(AudioSystem.getAudioInputStream(waveFile));
             clip.start();
 
-
         } catch (Exception e){
             System.out.println("sound doesn't work");
                  }
+        //TODO: add loop to sound
 
     }
 }
