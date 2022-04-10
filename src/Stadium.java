@@ -7,7 +7,7 @@ public class Stadium extends JPanel {
     public static final int BOUND_X = 20, BOUND_Y = 80, BOUND_WIDTH = 850, BOUND_HEIGHT = 570,
             KEEPER_WIDTH = 200, KEEPER_HEIGHT = 80, KEEPER_MARGIN = 90, OVAL_16_HEIGHT = 100, OVAL_16_MARGIN = 20, HALF_OVAL_HEIGHT = 200,
             CORNER_WIDTH = 10, GOAL_MARGIN = 25,WIDTH_FLAG = 20, HEIGHT_FLAG = 40, BOUND_Y_FLAG = BOUND_Y-(WIDTH_FLAG)*2,START_GOAL_SPEED=20,
-            REDUCE_SPEED=5,MAX_SPEED=4,CORNER_START_ANGLE=90,CORNER_END_ANGLE=270, OVAL_START =0, OVAL_END =180,PENALTY_SIZE=4;
+            CORNER_START_ANGLE=90,CORNER_END_ANGLE=270, OVAL_START =0, OVAL_END =180,PENALTY_SIZE=4;
     private Rectangle bounds;
     private Rectangle goalKeeper;
     private Rectangle plaza16;
@@ -49,39 +49,6 @@ public class Stadium extends JPanel {
 
     }
 
-    public void goalMovement(Ball ball) {
-        Thread t2 = new Thread(() -> {
-            boolean goalMovement = true;
-            while (true) {
-                if (goalMovement) {
-                    this.goal.moveRight();
-                } else {
-                    this.goal.moveLeft();
-                }
-                if (this.goal.getX() == BOUND_X + BOUND_WIDTH - this.goal.getWidth()) {
-                    goalMovement = false;
-                } else if (this.goal.getX() == BOUND_X) {
-                    goalMovement = true;
-                }
-                if (ball.getYLocation()==this.getBoundY()&&
-                        (ball.getXLocation()>this.getGoalX()&&ball.getXLocation()<this.getGoalX()+this.getGoalWidth())){
-                    if (this.speedGame>REDUCE_SPEED){
-                        this.speedGame-=REDUCE_SPEED;
-                    }else if (speedGame==REDUCE_SPEED){
-                        this.speedGame=MAX_SPEED;
-                    }
-                }
-                try {
-                    repaint();
-                    Thread.sleep(speedGame);
-
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        t2.start();
-    }
 
     public int setGoalY() {
         return this.goal.getY()  ;
@@ -107,6 +74,19 @@ public class Stadium extends JPanel {
         return this.goal.getWidth();
     }
 
+    public Rectangle getGoal() {
+        return goal;
+    }
+    public void goalMoveRight(){
+        this.goal.moveRight();
+    }
+    public void goalMoveLeft(){
+        this.goal.moveLeft();
+    }
+
+    public void setGoal(Rectangle goal) {
+        this.goal = goal;
+    }
 
     public void paint(Graphics graphics) {
         this.bounds.paint(graphics);

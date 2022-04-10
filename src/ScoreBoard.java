@@ -102,6 +102,7 @@ public static final int LINE_DIFFERENCE=40, PARAMETER_WIDTH=80,PARAMETER_HEIGHT=
 
     public void setGoals(int goals) {
         this.goals = goals;
+
     }
 
     public int getFault() {
@@ -110,6 +111,17 @@ public static final int LINE_DIFFERENCE=40, PARAMETER_WIDTH=80,PARAMETER_HEIGHT=
 
     public void setFault(int fault) {
         this.fault = fault;
+
+    }
+
+    public void setGoalsZero(){
+        this.goals=0;
+        this.goalScore.setText(String.valueOf(this.goals));
+    }
+    public void setFaultZero(){
+        this.fault=3;
+        this.faultScore.setText(String.valueOf(this.fault));
+
     }
 
 

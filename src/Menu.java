@@ -20,7 +20,7 @@ public class Menu extends JPanel {
         this.add(newGame);
         this.newGame.addActionListener((event) -> {
             this.newGame.setVisible(false);
-            GameScene gameScene = new GameScene(0, 0, width, height);
+            GameScene gameScene = new GameScene(0, 0, width, height,this.newGame);
             this.add(gameScene);
         });
         this.setDoubleBuffered(true);
