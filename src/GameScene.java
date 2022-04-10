@@ -10,6 +10,7 @@ public class GameScene extends JPanel {
     private Stadium stadium;
     private Ball ball;
     private BackSound backSound;
+//    private ScoreBoard scoreBoard;
 
 
     public GameScene(int x, int y, int width, int height) {
@@ -17,6 +18,7 @@ public class GameScene extends JPanel {
         this.setLayout(null);
         this.setBounds(x, y, width, height);
         this.setDoubleBuffered(true);
+//        this.scoreBoard=new ScoreBoard(x,height);
         this.backSound=new BackSound();
         this.backSound.backSound();
         this.stadium = new Stadium();
@@ -24,6 +26,7 @@ public class GameScene extends JPanel {
         this.ball = new Ball(this.player.legsX(), this.player.legsY());
         this.stadium.goalMovement(this.ball);
         this.gameLoop();
+        this.setVisible(true);
     }
     private void backgroundSound(){
         Thread thread=new Thread(()->{
@@ -92,6 +95,7 @@ public class GameScene extends JPanel {
         this.stadium.paint(g);
         this.ball.paint(g);
         this.player.paint(g);
+//        this.scoreBoard.paintComponent(g);
 
 
     }

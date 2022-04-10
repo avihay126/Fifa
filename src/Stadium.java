@@ -7,7 +7,8 @@ public class Stadium extends JPanel {
     public static final int BOUND_X = 20, BOUND_Y = 80, BOUND_WIDTH = 850, BOUND_HEIGHT = 570,
             KEEPER_WIDTH = 200, KEEPER_HEIGHT = 80, KEEPER_MARGIN = 90, OVAL_16_HEIGHT = 100, OVAL_16_MARGIN = 20, HALF_OVAL_HEIGHT = 200,
             CORNER_WIDTH = 10, GOAL_MARGIN = 25,WIDTH_FLAG = 20, HEIGHT_FLAG = 40, BOUND_Y_FLAG = BOUND_Y-(WIDTH_FLAG)*2,START_GOAL_SPEED=20,
-            REDUCE_SPEED=5,MAX_SPEED=4,CORNER_START_ANGLE=90,CORNER_END_ANGLE=270, OVAL_START =0, OVAL_END =180,PENALTY_SIZE=4;
+            REDUCE_SPEED=5,MAX_SPEED=4,CORNER_START_ANGLE=90,CORNER_END_ANGLE=270, OVAL_START =0, OVAL_END =180,PENALTY_SIZE=4
+            , SCORE_BOARD_WIDTH = 230, SCORE_BOARD_HEIGHT = 180;
     private Rectangle bounds;
     private Rectangle goalKeeper;
     private Rectangle plaza16;
@@ -21,10 +22,13 @@ public class Stadium extends JPanel {
     private ImageIcon rightFlag;
     private ImageIcon CrowdAshkelon;
     private int speedGame;
+    private ScoreBoard scoreBoard;
 //    private JLabel nameUser;
 
 
     public Stadium() {
+
+        this.setLayout(null);
         this.setBackground(Color.green);
         this.bounds = new Rectangle(BOUND_X, BOUND_Y, BOUND_WIDTH, BOUND_HEIGHT, Color.white, false);
         this.goalKeeper = new Rectangle(BOUND_X + BOUND_WIDTH / 2 - KEEPER_WIDTH / 2, BOUND_Y, KEEPER_WIDTH, KEEPER_HEIGHT, Color.white, false);
@@ -39,6 +43,8 @@ public class Stadium extends JPanel {
         this.rightFlag = new ImageIcon("right flag.png");
         this.CrowdAshkelon = new ImageIcon("crwod Ashkelon.png");
         this.speedGame=START_GOAL_SPEED;
+        this.scoreBoard=new ScoreBoard(BOUND_X,BOUND_Y+BOUND_HEIGHT-SCORE_BOARD_HEIGHT,SCORE_BOARD_WIDTH,SCORE_BOARD_HEIGHT);
+
 //        this.drawScoreBoard();
     }
 
@@ -111,6 +117,7 @@ public class Stadium extends JPanel {
         this.rightCorner.paint(graphics);
         this.leftCorner.paint(graphics);
         this.goal.paint(graphics);
+        this.scoreBoard.paintComponent(graphics);
         graphics.drawImage(rightFlag.getImage(), BOUND_X, BOUND_Y_FLAG, WIDTH_FLAG, HEIGHT_FLAG, null);
         graphics.drawImage(leftFlag.getImage(), BOUND_WIDTH , BOUND_Y_FLAG, WIDTH_FLAG, HEIGHT_FLAG, null);
         graphics.drawImage(CrowdAshkelon.getImage(), 0,0,900,42,null);
