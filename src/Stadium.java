@@ -17,7 +17,6 @@ public class Stadium extends JPanel {
     private Oval rightCorner;
     private Oval leftCorner;
     private Rectangle goal;
-    private Rectangle scoreBoard;
     private ImageIcon leftFlag;
     private ImageIcon rightFlag;
     private ImageIcon CrowdAshkelon;
@@ -36,7 +35,6 @@ public class Stadium extends JPanel {
         this.leftCorner = new Oval(bounds.getX(), BOUND_Y, CORNER_WIDTH, CORNER_WIDTH, CORNER_START_ANGLE, -CORNER_END_ANGLE, Color.white, false);
         this.rightCorner = new Oval(BOUND_X + BOUND_WIDTH - CORNER_WIDTH, BOUND_Y, CORNER_WIDTH, CORNER_WIDTH, CORNER_START_ANGLE, CORNER_END_ANGLE, Color.white, false);
         this.goal = new Rectangle(this.goalKeeper.getX() + GOAL_MARGIN, BOUND_Y - GOAL_MARGIN, this.goalKeeper.getWidth() - (GOAL_MARGIN * 2), GOAL_MARGIN, Color.white, false);
-        this.scoreBoard = new Rectangle(BOUND_X, BOUND_HEIGHT - 30, 200, 50, Color.blue, true);
         this.leftFlag = new ImageIcon("left flag.png");
         this.rightFlag = new ImageIcon("right flag.png");
         this.CrowdAshkelon = new ImageIcon("crwod Ashkelon.png");
@@ -113,7 +111,6 @@ public class Stadium extends JPanel {
         this.rightCorner.paint(graphics);
         this.leftCorner.paint(graphics);
         this.goal.paint(graphics);
-        this.scoreBoard.paint(graphics);
         graphics.drawImage(rightFlag.getImage(), BOUND_X, BOUND_Y_FLAG, WIDTH_FLAG, HEIGHT_FLAG, null);
         graphics.drawImage(leftFlag.getImage(), BOUND_WIDTH , BOUND_Y_FLAG, WIDTH_FLAG, HEIGHT_FLAG, null);
         graphics.drawImage(CrowdAshkelon.getImage(), 0,0,900,42,null);
