@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.Menu;
 import java.util.Random;
 
 public class GameScene extends JPanel {
