@@ -18,6 +18,7 @@ public class Window extends JFrame {
         this.setTitle("The fast gate by A.I.U.A");
         Menu menu=new Menu(0,0,WIN_WID,WIN_HEI);
         this.add(menu);
+
         this.setVisible(true);
 
 

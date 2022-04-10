@@ -5,12 +5,12 @@ import java.util.Random;
 
 public class GameScene extends JPanel {
 
-    public static final int GAME_SPEED = 6;
+    public static final int GAME_SPEED = 6, SCORE_BOARD_WIDTH = 260, SCORE_BOARD_HEIGHT = 160;
     private Player player;
     private Stadium stadium;
     private Ball ball;
     private BackSound backSound;
-//    private ScoreBoard scoreBoard;
+    private ScoreBoard scoreBoard;
 
 
     public GameScene(int x, int y, int width, int height) {
@@ -18,7 +18,9 @@ public class GameScene extends JPanel {
         this.setLayout(null);
         this.setBounds(x, y, width, height);
         this.setDoubleBuffered(true);
-//        this.scoreBoard=new ScoreBoard(x,height);
+
+        this.scoreBoard=new ScoreBoard(x+Stadium.BOUND_X,Stadium.BOUND_Y+Stadium.BOUND_HEIGHT-SCORE_BOARD_HEIGHT,SCORE_BOARD_WIDTH,SCORE_BOARD_HEIGHT);
+        this.add(this.scoreBoard);
         this.backSound=new BackSound();
         this.backSound.backSound();
         this.stadium = new Stadium();
@@ -40,7 +42,8 @@ public class GameScene extends JPanel {
 
             keyControl();
             boolean shoot = false;
-            while (true) {
+            boolean run=true;
+            while (run) {
                 switch (this.player.getDirection()) {
                     case Player.RIGHT:
                         this.player.moveRight();
@@ -67,8 +70,18 @@ public class GameScene extends JPanel {
                 }
                 if (this.ball.getYLocation() == this.stadium.getBoundY() && (this.ball.getXLocation() > this.stadium.getGoalX() && this.ball.getXLocation() < this.stadium.getGoalX() + this.stadium.getGoalWidth())) {
                     System.out.println("goal");
+                    this.scoreBoard.addGoal();
+
                 }else if (this.ball.getYLocation()==this.stadium.getBoundY()&&(this.ball.getXLocation()<this.stadium.getGoalX()||this.ball.getXLocation()>this.stadium.getGoalX()+this.stadium.getGoalWidth())){
                     System.out.println("Missed");
+                    this.scoreBoard.lessFault();
+                }
+                if (this.scoreBoard.getGoals()==10){
+                    run=false;
+
+                }else if (this.scoreBoard.getFault()==0){
+                    run=false;
+
                 }
                 repaint();
                 try {
