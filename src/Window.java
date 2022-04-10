@@ -19,9 +19,9 @@ public class Window extends JFrame {
         Menu menu=new Menu(0,0,WIN_WID,WIN_HEI);
         this.add(menu);
         this.setVisible(true);
-
-
-
+        ScoreBoard scoreBoard=new ScoreBoard(0,100,100,50);
+        this.add(scoreBoard);
+        this.setVisible(true);
 
 
     }
