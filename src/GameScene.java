@@ -11,6 +11,7 @@ public class GameScene extends JPanel {
     private Ball ball;
     private BackSound backSound;
     private ScoreBoard scoreBoard;
+    private JButton restart;
 
 
     public GameScene(int x, int y, int width, int height) {
@@ -27,6 +28,12 @@ public class GameScene extends JPanel {
         this.player = new Player(this.getX() + this.getWidth() / 2, this.getY() + this.getHeight() / 2);
         this.ball = new Ball(this.player.legsX(), this.player.legsY());
         this.stadium.goalMovement(this.ball);
+        this.restart=new JButton("Restart");
+        this.restart.setBounds(this.getWidth()-200,this.getHeight()-200,80,20);
+        this.add(this.restart);
+
+
+
         this.gameLoop();
         this.setVisible(true);
     }
@@ -108,7 +115,7 @@ public class GameScene extends JPanel {
         this.stadium.paint(g);
         this.ball.paint(g);
         this.player.paint(g);
-//        this.scoreBoard.paintComponent(g);
+
 
 
     }

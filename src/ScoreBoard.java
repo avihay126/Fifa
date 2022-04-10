@@ -56,6 +56,7 @@ public static final int LINE_DIFFERENCE=40, PARAMETER_WIDTH=80,PARAMETER_HEIGHT=
 
 
 
+
         this.setDoubleBuffered(true);
         this.setVisible(true);
     }
