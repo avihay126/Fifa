@@ -1,39 +1,47 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.Menu;
-import java.util.Random;
 
 public class GameScene extends JPanel {
 
-    public static final int GAME_SPEED = 6, SCORE_BOARD_WIDTH = 260, SCORE_BOARD_HEIGHT = 160;
+    public static final int GAME_SPEED = 6, SCORE_BOARD_WIDTH = 260, SCORE_BOARD_HEIGHT = 160,RESTART_WIDTH=80,RESTART_HEIGHT=20,
+            START_GOAL_SPEED=20,REDUCE_SPEED=3,MAX_SPEED=4;
     private Player player;
     private Stadium stadium;
     private Ball ball;
     private BackSound backSound;
     private ScoreBoard scoreBoard;
-    private JButton restart;
+    private JButton exit;
+    private boolean run;
+    private JButton gameOver;
+    private int goalSpeed;
 
 
-    public GameScene(int x, int y, int width, int height) {
+    public GameScene(int x, int y, int width, int height,JButton main) {
         this.setBackground(Color.green);
         this.setLayout(null);
         this.setBounds(x, y, width, height);
         this.setDoubleBuffered(true);
-
+        this.run=true;
+        this.gameOver=main;
+        this.goalSpeed=START_GOAL_SPEED;
         this.scoreBoard=new ScoreBoard(x+Stadium.BOUND_X,Stadium.BOUND_Y+Stadium.BOUND_HEIGHT-SCORE_BOARD_HEIGHT,SCORE_BOARD_WIDTH,SCORE_BOARD_HEIGHT);
         this.add(this.scoreBoard);
         this.backSound=new BackSound();
-        this.backSound.backSound();
+        //this.backSound.backSound();
         this.stadium = new Stadium();
         this.player = new Player(this.getX() + this.getWidth() / 2, this.getY() + this.getHeight() / 2);
         this.ball = new Ball(this.player.legsX(), this.player.legsY());
-        this.stadium.goalMovement(this.ball);
-        this.restart=new JButton("Restart");
-        this.restart.setBounds(this.getWidth()-200,this.getHeight()-200,80,20);
-        this.add(this.restart);
+       // this.stadium.goalMovement(this.ball);
+        this.exit =new JButton("Exit");
+        this.exit.setBounds(Stadium.BOUND_X+Stadium.BOUND_WIDTH-RESTART_WIDTH,Stadium.BOUND_Y+Stadium.BOUND_HEIGHT-RESTART_HEIGHT,RESTART_WIDTH,RESTART_HEIGHT);
+        this.add(this.exit);
+        this.exit.addActionListener((event)->{
+            this.gameOver();
 
 
+        });
 
+        this.goalMovement();
         this.gameLoop();
         this.setVisible(true);
     }
@@ -43,13 +51,48 @@ public class GameScene extends JPanel {
         });
         thread.start();
     }
+    private void goalMovement(){
+        Thread t2=new Thread(()->{
+            boolean goalMovement = true;
+            while (true) {
+                if (goalMovement) {
+                    this.stadium.goalMoveRight();
+                } else {
+                    this.stadium.goalMoveLeft();
+                }
+                if (this.stadium.getGoal().getX() == Stadium.BOUND_X + Stadium.BOUND_WIDTH - this.stadium.getGoal().getWidth()) {
+                    goalMovement = false;
+                } else if (this.stadium.getGoal().getX() == Stadium.BOUND_X) {
+                    goalMovement = true;
+                }
+                if (this.ball.getYLocation()==this.stadium.getBoundY()&&
+                        (this.ball.getXLocation()>this.stadium.getGoalX()&&ball.getXLocation()<this.stadium.getGoalX()+this.stadium.getGoalWidth())){
+                    if (this.goalSpeed>REDUCE_SPEED){
+                        this.goalSpeed-=REDUCE_SPEED;
+                    }else {
+                        this.goalSpeed=MAX_SPEED;
+                    }
+                }
+                try {
+                    repaint();
+                    Thread.sleep(this.goalSpeed);
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+
+
+
+        });t2.start();
+    }
 
     private void gameLoop() {
         Thread t1 = new Thread(() -> {
 
             keyControl();
             boolean shoot = false;
-            boolean run=true;
+
             while (run) {
                 switch (this.player.getDirection()) {
                     case Player.RIGHT:
@@ -84,10 +127,10 @@ public class GameScene extends JPanel {
                     this.scoreBoard.lessFault();
                 }
                 if (this.scoreBoard.getGoals()==10){
-                    run=false;
+                    this.gameOver();
 
                 }else if (this.scoreBoard.getFault()==0){
-                    run=false;
+                    this.gameOver();
 
                 }
                 repaint();
@@ -106,6 +149,14 @@ public class GameScene extends JPanel {
         this.setFocusable(true);
         this.requestFocus();
         this.addKeyListener(keyControl);
+    }
+
+    public void gameOver(){
+        run=false;
+        this.setVisible(false);
+        this.scoreBoard.setVisible(false);
+        this.stadium.setVisible(false);
+        this.gameOver.setVisible(true);
     }
 
     public void paintComponent(Graphics g) {
