@@ -21,7 +21,6 @@ public class GameScene extends JPanel {
         this.ball = new Ball(this.player.legsX(), this.player.legsY());
         this.stadium.goalMovement(this.ball);
         this.gameLoop();
-
     }
 
     private void gameLoop() {
