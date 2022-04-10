@@ -17,8 +17,9 @@ public class Window extends JFrame {
         this.setResizable(false);
         this.setLayout(null);
         this.setTitle("The fast gate by A.I.U.A");
-        GameScene gameScene = new GameScene(0, 0, WIN_WID , WIN_HEI);
-      add(gameScene);
+        Menu menu=new Menu(0,0,WIN_WID,WIN_HEI);
+        menu.paintComponent(getGraphics());
+        this.add(menu);
 
         // TODO:  הוספתי את המחלקה של התפריט(היא אמורה להיות בסט) אבל לא הצלחתי להוסיף אותה דרך החלון של הווינדו
 
