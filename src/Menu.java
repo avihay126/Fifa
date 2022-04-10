@@ -11,9 +11,8 @@ public class Menu extends  JPanel{
         this.setBounds(x,y,width,height);
         this.setLayout(null);
         JButton newGame = new JButton("New Game");
-        Font myFont=new Font("Arial",Font.BOLD,30);
-        newGame.setBounds(this.getWidth()/(3),this.getHeight()/2,200,50);
-        newGame.setFont(myFont);
+        newGame.setBounds(this.getWidth()/2,this.getHeight()/2,100,50);
+
         this.add(newGame);
         this.backGround=new ImageIcon("pic_game.jpeg");
 
@@ -25,6 +24,7 @@ public class Menu extends  JPanel{
 
             GameScene gameScene = new GameScene(0, 0, width,height);
             this.add(gameScene);
+
 
         });
 
