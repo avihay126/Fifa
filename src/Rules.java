@@ -15,8 +15,9 @@ public class Rules extends JPanel {
                 "Game rules:<br/>" +
                 "1. Active buttons in the game are:<br/>" +
                 "Right arrow to move to the right side, left arrow to move to the left side and top arrow to kick to the goal.<br/>" +
-                "2. Pay attention! You have 3 disqualifications, each miss is considered a disqualification.<br/>" +
-                "3. After each goal the speed of the goal increases, get ready!<br/>" +
+                "2. You have to score "+GameScene.GOAL_IN_GAME+ " goals to win.<br/>" +
+                "3. Pay attention! You have 3 disqualifications, each miss is considered a disqualification.<br/>" +
+                "4. After each goal the speed of the goal increases, get ready!<br/>" +
                 "good luck!<html>");
         this.rules.setBounds(x,y,width,height);
         this.rules.setFont(font);

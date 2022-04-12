@@ -5,6 +5,7 @@ public class GameScene extends JPanel {
 
     public static final int GAME_SPEED = 6, SCORE_BOARD_WIDTH = 260, SCORE_BOARD_HEIGHT = 160,RESTART_WIDTH=80,RESTART_HEIGHT=20,
             START_GOAL_SPEED=20,REDUCE_SPEED=3,MAX_SPEED=4;
+    public static final int GOAL_IN_GAME = 10;
     private Player player;
     private Stadium stadium;
     private Ball ball;
@@ -27,11 +28,11 @@ public class GameScene extends JPanel {
         this.scoreBoard=new ScoreBoard(x+Stadium.BOUND_X,Stadium.BOUND_Y+Stadium.BOUND_HEIGHT-SCORE_BOARD_HEIGHT,SCORE_BOARD_WIDTH,SCORE_BOARD_HEIGHT);
         this.add(this.scoreBoard);
         this.backSound=new BackSound();
-        //this.backSound.backSound();
+        this.backSound.backSound();
         this.stadium = new Stadium();
         this.player = new Player(this.getX() + this.getWidth() / 2, this.getY() + this.getHeight() / 2);
         this.ball = new Ball(this.player.legsX(), this.player.legsY());
-       // this.stadium.goalMovement(this.ball);
+       //this.stadium.goalMovement(this.ball);
         this.exit =new JButton("Exit");
         this.exit.setBounds(Stadium.BOUND_X+Stadium.BOUND_WIDTH-RESTART_WIDTH,Stadium.BOUND_Y+Stadium.BOUND_HEIGHT-RESTART_HEIGHT,RESTART_WIDTH,RESTART_HEIGHT);
         this.add(this.exit);
@@ -129,10 +130,12 @@ public class GameScene extends JPanel {
                     System.out.println("Missed");
                     this.scoreBoard.lessFault();
                 }
-                if (this.scoreBoard.getGoals()==10){
+                if (this.scoreBoard.getGoals()== GOAL_IN_GAME){
+                    System.out.println("victory!  game over");
                     this.gameOver();
 
                 }else if (this.scoreBoard.getFault()==0){
+                    System.out.println("game over");
                     this.gameOver();
 
                 }
