@@ -4,7 +4,7 @@ import java.awt.*;
 public class GameScene extends JPanel {
 
     public static final int GAME_SPEED = 6, SCORE_BOARD_WIDTH = 260, SCORE_BOARD_HEIGHT = 160, EXIT_WIDTH =80, EXIT_HEIGHT =20,
-            START_GOAL_SPEED=19,REDUCE_SPEED=3,MAX_SPEED=4,GOAL_IN_GAME = 10;
+            START_GOAL_SPEED=19,REDUCE_SPEED=3,MAX_SPEED=4,GOAL_IN_GAME = 10,END_LABEL_WIDTH=350,END_LABEL_HEIGHT=140;
 
     private Player player;
     private Stadium stadium;
@@ -12,9 +12,10 @@ public class GameScene extends JPanel {
     private BackSound backSound;
     private ScoreBoard scoreBoard;
     private JButton exit;
-    private boolean run;
     private JButton menuNewGame;
     private JButton menuGameRule;
+    private JLabel winner;
+    private boolean run;
     private int goalSpeed;
 
 
@@ -34,9 +35,11 @@ public class GameScene extends JPanel {
         this.stadium = new Stadium();
         this.player = new Player(this.getX() + this.getWidth() / 2, this.getY() + this.getHeight() / 2);
         this.ball = new Ball(this.player.legsX(), this.player.legsY());
+
         this.exit=addButton(null,"Exit",Stadium.BOUND_X+Stadium.BOUND_WIDTH- EXIT_WIDTH,Stadium.BOUND_Y+Stadium.BOUND_HEIGHT- EXIT_HEIGHT, EXIT_WIDTH, EXIT_HEIGHT);
+
         this.exit.addActionListener((event)->{
-            this.gameOver();
+            this.exitGame();
         });
 
         this.goalMovement();
@@ -106,20 +109,23 @@ public class GameScene extends JPanel {
                     System.out.println("goal");
                     this.scoreBoard.addGoal();
                     if (this.goalSpeed>MAX_SPEED){
-                        this.goalSpeed-=3;
+                        this.goalSpeed-=REDUCE_SPEED;
                     }else this.goalSpeed=MAX_SPEED;
                 }else if (ballGetEnd()&&!isGoal()){
                     System.out.println("Missed");
                     this.scoreBoard.lessFault();
                 }
                 if (this.scoreBoard.getGoals()== GOAL_IN_GAME){
+
                     System.out.println("victory!  game over");
-                    this.gameOver();
+                    this.exitGame();
 
                 }else if (this.scoreBoard.getFault()==0){
+                    run=false;
+                    Font font=new Font("Ariel",Font.ITALIC,70);
+                    this.winner=addLabel(font,"!! Winner !!",Color.blue,this.getWidth()/2-END_LABEL_WIDTH/2,this.getHeight()/3-END_LABEL_HEIGHT/2,END_LABEL_WIDTH,END_LABEL_HEIGHT);
+                    this.exit.setBounds(this.getWidth()/2-END_LABEL_WIDTH/2,this.getHeight()/2-END_LABEL_HEIGHT/2,END_LABEL_WIDTH,END_LABEL_HEIGHT);
                     System.out.println("game over");
-                    this.gameOver();
-
                 }
                 repaint();
                 try {
@@ -152,6 +158,15 @@ public class GameScene extends JPanel {
         this.add(button);
         return button;
     }
+    private JLabel addLabel(Font font, String labelText,Color color,int x,int y,int width,int height){
+        JLabel label=new JLabel(labelText);
+        label.setForeground(color);
+        label.setFont(font);
+        label.setBounds(x,y,width,height);
+        this.add(label);
+        return label;
+
+    }
 
     public void keyControl() {
         KeyControl keyControl = new KeyControl(this.player, this.ball);
@@ -159,8 +174,11 @@ public class GameScene extends JPanel {
         this.requestFocus();
         this.addKeyListener(keyControl);
     }
-
     public void gameOver(){
+
+    }
+
+    public void exitGame(){
         run=false;
         this.setVisible(false);
         this.scoreBoard.setVisible(false);

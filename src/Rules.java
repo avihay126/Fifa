@@ -23,7 +23,6 @@ public class Rules extends JPanel {
                 "good luck!<html>");
         this.rules.setBounds(x,y,width,height);
         this.rules.setFont(font);
-        this.rules.setVisible(true);
         this.add(this.rules);
         this.setDoubleBuffered(true);
         this.setVisible(true);
