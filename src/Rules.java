@@ -8,15 +8,20 @@ public class Rules extends JPanel {
     public Rules(int x, int y, int width, int height) {
         this.setBounds(x, y, width, height);
         this.setLayout(null);
-        Font font = new Font("Ariel", Font.BOLD, 16);
-        JLabel textRules = new JLabel("Welcome to \n" +
-                "The fast gate!\n" +
-                "Game rules:\n" +
-                "1. Active buttons in the game are:\n" +
-                "Right arrow to move to the right side, left arrow to move to the left side and top arrow to kick to the goal.\n" +
-                "2. Pay attention! You have 3 disqualifications, each miss is considered a disqualification.\n" +
-                "3. After each goal the speed of the goal increases, get ready!\n" +
-                "good luck!");
+        this.setBackground(Color.blue);
+        Font font = new Font("Ariel", Font.BOLD, 30);
+        JLabel textRules = new JLabel("<html>Welcome to <br/>" +
+                "The fast gate!<br/>" +
+                "Game rules:<br/>" +
+                "1. Active buttons in the game are:<br/>" +
+                "Right arrow to move to the right side, left arrow to move to the left side and top arrow to kick to the goal.<br/>" +
+                "2. Pay attention! You have 3 disqualifications, each miss is considered a disqualification.<br/>" +
+                "3. After each goal the speed of the goal increases, get ready!<br/>" +
+                "good luck!<html>");
+
+        textRules.setBounds(x,y,width,height);
+        textRules.setFont(font);
+        this.add(textRules);
         this.setLayout(null);
         this.setBounds(x, y, width, height);
         this.setDoubleBuffered(true);
