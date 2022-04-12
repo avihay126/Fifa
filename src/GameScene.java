@@ -15,6 +15,8 @@ public class GameScene extends JPanel {
     private JButton menuNewGame;
     private JButton menuGameRule;
     private JLabel winner;
+    private JLabel looser;
+    private Font endLabelFont;
     private boolean run;
     private int goalSpeed;
 
@@ -25,6 +27,7 @@ public class GameScene extends JPanel {
         this.setBounds(x, y, width, height);
         this.setDoubleBuffered(true);
         this.run=true;
+        this.endLabelFont=new Font("Ariel",Font.ITALIC,70);
         this.menuNewGame =menuNewGame;
         this.menuGameRule=menuGameRule;
         this.goalSpeed=START_GOAL_SPEED;
@@ -116,15 +119,15 @@ public class GameScene extends JPanel {
                     this.scoreBoard.lessFault();
                 }
                 if (this.scoreBoard.getGoals()== GOAL_IN_GAME){
+                    this.winner=addLabel(this.endLabelFont,"!! Winner !!",Color.blue,this.getWidth()/2-END_LABEL_WIDTH/2,this.getHeight()/3-END_LABEL_HEIGHT/2,END_LABEL_WIDTH,END_LABEL_HEIGHT);
+                    gameFinished();
 
                     System.out.println("victory!  game over");
-                    this.exitGame();
+
 
                 }else if (this.scoreBoard.getFault()==0){
-                    run=false;
-                    Font font=new Font("Ariel",Font.ITALIC,70);
-                    this.winner=addLabel(font,"!! Winner !!",Color.blue,this.getWidth()/2-END_LABEL_WIDTH/2,this.getHeight()/3-END_LABEL_HEIGHT/2,END_LABEL_WIDTH,END_LABEL_HEIGHT);
-                    this.exit.setBounds(this.getWidth()/2-END_LABEL_WIDTH/2,this.getHeight()/2-END_LABEL_HEIGHT/2,END_LABEL_WIDTH,END_LABEL_HEIGHT);
+                    this.looser=addLabel(this.endLabelFont," !! Loser !!",Color.red,this.getWidth()/2-END_LABEL_WIDTH/2,this.getHeight()/3-END_LABEL_HEIGHT/2,END_LABEL_WIDTH,END_LABEL_HEIGHT);
+                    gameFinished();
                     System.out.println("game over");
                 }
                 repaint();
@@ -136,6 +139,12 @@ public class GameScene extends JPanel {
             }
         });
         t1.start();
+    }
+
+    private void gameFinished(){
+        this.run=false;
+        this.exit.setFont(this.endLabelFont);
+        this.exit.setBounds(this.getWidth()/2-END_LABEL_WIDTH/2,this.getHeight()/2-END_LABEL_HEIGHT/2,END_LABEL_WIDTH,END_LABEL_HEIGHT);
     }
     private boolean ballGetEnd(){
         return this.ball.getYLocation() == this.stadium.getBoundY();
