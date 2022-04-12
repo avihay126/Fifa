@@ -34,7 +34,7 @@ public class GameScene extends JPanel {
         this.scoreBoard=new ScoreBoard(x+Stadium.BOUND_X,Stadium.BOUND_Y+Stadium.BOUND_HEIGHT-SCORE_BOARD_HEIGHT,SCORE_BOARD_WIDTH,SCORE_BOARD_HEIGHT);
         this.add(this.scoreBoard);
         this.backSound=new BackSound();
-        this.backSound.backSound();
+        this.backSound.backSound("start_game_whistle.wav");
         this.stadium = new Stadium();
         this.player = new Player(this.getX() + this.getWidth() / 2, this.getY() + this.getHeight() / 2);
         this.ball = new Ball(this.player.legsX(), this.player.legsY());
@@ -103,6 +103,9 @@ public class GameScene extends JPanel {
                 if (this.ball.getDirection() == Ball.UP) {
                     shoot = true;
                     this.ball.goUp();
+                    if (ball.getYLocation()==this.player.legsY()-1) {
+                        backSound.backSound("kick.wav");
+                    }
                 }
                 if (this.ball.getYLocation() == this.stadium.getBoundY() - 5) {
                     shoot = false;
@@ -110,6 +113,7 @@ public class GameScene extends JPanel {
                 }
                 if (ballGetEnd()&&isGoal()) {
                     System.out.println("goal");
+                        this.backSound.backSound("goal.wav");
                     this.scoreBoard.addGoal();
                     if (this.goalSpeed>MAX_SPEED){
                         this.goalSpeed-=REDUCE_SPEED;
@@ -120,13 +124,15 @@ public class GameScene extends JPanel {
                 }
                 if (this.scoreBoard.getGoals()== GOAL_IN_GAME){
                     this.winner=addLabel(this.endLabelFont,"!! Winner !!",Color.blue,this.getWidth()/2-END_LABEL_WIDTH/2,this.getHeight()/3-END_LABEL_HEIGHT/2,END_LABEL_WIDTH,END_LABEL_HEIGHT);
+                    this.backSound.backSound("victory.wav");
                     gameFinished();
 
                     System.out.println("victory!  game over");
 
 
                 }else if (this.scoreBoard.getFault()==0){
-                    this.looser=addLabel(this.endLabelFont," !! Loser !!",Color.red,this.getWidth()/2-END_LABEL_WIDTH/2,this.getHeight()/3-END_LABEL_HEIGHT/2,END_LABEL_WIDTH,END_LABEL_HEIGHT);
+                    this.looser=addLabel(this.endLabelFont,"out of life !!",Color.red,this.getWidth()/2-END_LABEL_WIDTH/2,this.getHeight()/3-END_LABEL_HEIGHT/2,END_LABEL_WIDTH,END_LABEL_HEIGHT);
+                    this.backSound.backSound("end_game_whistle.wav");
                     gameFinished();
                     System.out.println("game over");
                 }
@@ -183,10 +189,6 @@ public class GameScene extends JPanel {
         this.requestFocus();
         this.addKeyListener(keyControl);
     }
-    public void gameOver(){
-
-    }
-
     public void exitGame(){
         run=false;
         this.setVisible(false);

@@ -6,22 +6,9 @@ import java.io.IOException;
 public class BackSound {
 
 
-    public BackSound() {
-//        try {
-//            File waveFile=new File("SoccerCrowd.wav");
-//            Clip clip=AudioSystem.getClip();
-//            clip.open(AudioSystem.getAudioInputStream(waveFile));
-//                clip.start();
-//        } catch (Exception e){
-//            System.out.println("sound doesn't work");
-//                 }
-//        //TODO: add loop to sound
-
-    }
-
-    public void backSound() {
+    public void backSound(String sound) {
         try {
-            File waveFile = new File("SoccerCrowd.wav");
+            File waveFile = new File(sound);
             Clip clip = AudioSystem.getClip();
             clip.open(AudioSystem.getAudioInputStream(waveFile));
             clip.start();

@@ -40,7 +40,7 @@ public class Stadium extends JPanel {
         this.goal = new Rectangle(this.goalKeeper.getX() + GOAL_MARGIN, BOUND_Y - GOAL_MARGIN, this.goalKeeper.getWidth() - (GOAL_MARGIN * 2), GOAL_MARGIN, Color.white, false);
         this.leftFlag = new ImageIcon("left flag.png");
         this.rightFlag = new ImageIcon("right flag.png");
-        this.CrowdAshkelon = new ImageIcon("crwod Ashkelon.png");
+        this.CrowdAshkelon = new ImageIcon("crowd Ashkelon.png");
         this.speedGame=START_GOAL_SPEED;
 
         this.setVisible(true);
