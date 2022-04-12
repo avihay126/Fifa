@@ -4,8 +4,8 @@ import java.awt.*;
 public class GameScene extends JPanel {
 
     public static final int GAME_SPEED = 6, SCORE_BOARD_WIDTH = 260, SCORE_BOARD_HEIGHT = 160,RESTART_WIDTH=80,RESTART_HEIGHT=20,
-            START_GOAL_SPEED=20,REDUCE_SPEED=3,MAX_SPEED=4;
-    public static final int GOAL_IN_GAME = 10;
+            START_GOAL_SPEED=20,REDUCE_SPEED=3,MAX_SPEED=4,GOAL_IN_GAME = 10;
+
     private Player player;
     private Stadium stadium;
     private Ball ball;
@@ -61,41 +61,25 @@ public class GameScene extends JPanel {
                 } else {
                     this.stadium.goalMoveLeft();
                 }
-                if (this.stadium.getGoal().getX() == Stadium.BOUND_X + Stadium.BOUND_WIDTH - this.stadium.getGoal().getWidth()) {
+                if (reachRightBound(this.stadium.getGoal().getX(),this.stadium.getGoal().getWidth())) {
                     goalMovement = false;
-                } else if (this.stadium.getGoal().getX() == Stadium.BOUND_X) {
+                } else if (reachLeftBound(this.stadium.getGoal().getX())) {
                     goalMovement = true;
-                }
-                if (this.ball.getYLocation()==this.stadium.getBoundY()&&
-                        (this.ball.getXLocation()>this.stadium.getGoalX()&&this.ball.getXLocation()<this.stadium.getGoalX()+this.stadium.getGoalWidth())){
-                    if (this.goalSpeed>REDUCE_SPEED){
-                        this.goalSpeed-=REDUCE_SPEED;
-                        System.out.println(this.goalSpeed);
-                    }else {
-                        this.goalSpeed=MAX_SPEED;
-                        System.out.println(this.goalSpeed);
-                    }
                 }
                 try {
                     repaint();
                     Thread.sleep(this.goalSpeed);
-
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
-
-
-
         });t2.start();
     }
 
     private void gameLoop() {
         Thread t1 = new Thread(() -> {
-
             keyControl();
             boolean shoot = false;
-
             while (this.run) {
                 switch (this.player.getDirection()) {
                     case Player.RIGHT:
@@ -105,9 +89,9 @@ public class GameScene extends JPanel {
                         this.player.moveLeft();
                         break;
                 }
-                if (this.player.getLocation() == this.stadium.getBoundX() + this.stadium.getBoundWidth() - this.player.getBodyWidth()) {
+                if (reachRightBound(this.player.getLocation(),this.player.getBodyWidth())) {
                     this.player.moveLeft();
-                } else if (this.player.getLocation() == this.stadium.getBoundX()) {
+                } else if (reachLeftBound(this.player.getLocation())) {
                     this.player.moveRight();
                 }
                 if (!shoot) {
@@ -121,12 +105,13 @@ public class GameScene extends JPanel {
                     shoot = false;
                     this.ball.setDirection(Ball.NONE);
                 }
-                if (this.ball.getYLocation() == this.stadium.getBoundY() &&
-                        (this.ball.getXLocation() > this.stadium.getGoalX() && this.ball.getXLocation() < this.stadium.getGoalX() + this.stadium.getGoalWidth())) {
+                if (ballGetEnd()&&isGoal()) {
                     System.out.println("goal");
                     this.scoreBoard.addGoal();
-
-                }else if (this.ball.getYLocation()==this.stadium.getBoundY()&&(this.ball.getXLocation()<this.stadium.getGoalX()||this.ball.getXLocation()>this.stadium.getGoalX()+this.stadium.getGoalWidth())){
+                    if (this.goalSpeed>MAX_SPEED){
+                        this.goalSpeed-=3;
+                    }else this.goalSpeed=MAX_SPEED;
+                }else if (ballGetEnd()&&!isGoal()){
                     System.out.println("Missed");
                     this.scoreBoard.lessFault();
                 }
@@ -148,6 +133,19 @@ public class GameScene extends JPanel {
             }
         });
         t1.start();
+    }
+    private boolean ballGetEnd(){
+        return this.ball.getYLocation() == this.stadium.getBoundY();
+    }
+    private boolean isGoal(){
+        return this.ball.getXLocation() > this.stadium.getGoalX() && this.ball.getXLocation() < this.stadium.getGoalX() + this.stadium.getGoalWidth();
+    }
+
+    private boolean reachRightBound(int objectLocation,int objectWidth){
+        return objectLocation == Stadium.BOUND_X + Stadium.BOUND_WIDTH - objectWidth;
+    }
+    private boolean reachLeftBound(int objectLocation){
+        return objectLocation == Stadium.BOUND_X;
     }
 
     public void keyControl() {
