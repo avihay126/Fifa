@@ -29,12 +29,12 @@ public class Menu extends JPanel {
     private void buttonsListener(){
         this.newGame.addActionListener((event) -> {
             unVisibleButton();
-            GameScene gameScene = new GameScene(0, 0, this.getWidth(), this.getHeight(), this.newGame);
+            GameScene gameScene = new GameScene(0, 0, this.getWidth(), this.getHeight(), this.newGame,this.rulesOfGame);
             this.add(gameScene);
         });
         this.rulesOfGame.addActionListener((event) -> {
             unVisibleButton();
-            Rules rules = new Rules(this.getX(),this.getY(),this.getWidth(),this.getHeight());
+            Rules rules = new Rules(this.getX(),this.getY(),this.getWidth(),this.getHeight(),this.newGame,this.rulesOfGame);
             this.add(rules);
         });
     }

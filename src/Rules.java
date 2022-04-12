@@ -2,10 +2,12 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Rules extends JPanel {
+    public static final int EXIT_WIDTH =100, EXIT_HEIGHT =50;
+
     private JLabel rules;
     private JButton exit;
 
-    public Rules(int x, int y, int width, int height) {
+    public Rules(int x, int y, int width, int height,JButton menuNewGame,JButton menuGameRule) {
         this.setLayout(null);
         this.setBounds(x, y, width, height);
         this.setBackground(Color.lightGray);
@@ -25,7 +27,23 @@ public class Rules extends JPanel {
         this.add(this.rules);
         this.setDoubleBuffered(true);
         this.setVisible(true);
+        this.exit=addButton(font,"Exit",this.getWidth()/2-EXIT_WIDTH/2,Stadium.BOUND_Y+Stadium.BOUND_HEIGHT- EXIT_HEIGHT,EXIT_WIDTH,EXIT_HEIGHT);
+        this.exit.addActionListener((event)->{
+            this.setVisible(false);
+            this.exit.setVisible(false);
+            menuGameRule.setVisible(true);
+            menuNewGame.setVisible(true);
+        });
     }
+
+        private JButton addButton(Font font, String buttonText,int x,int y,int width,int height){
+            JButton button=new JButton(buttonText);
+            button.setFont(font);
+            button.setBounds(x,y,width,height);
+            button.setVisible(true);
+            this.add(button);
+            return button;
+        }
 
 
 }

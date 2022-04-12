@@ -3,8 +3,8 @@ import java.awt.*;
 
 public class GameScene extends JPanel {
 
-    public static final int GAME_SPEED = 6, SCORE_BOARD_WIDTH = 260, SCORE_BOARD_HEIGHT = 160,RESTART_WIDTH=80,RESTART_HEIGHT=20,
-            START_GOAL_SPEED=20,REDUCE_SPEED=3,MAX_SPEED=4,GOAL_IN_GAME = 10;
+    public static final int GAME_SPEED = 6, SCORE_BOARD_WIDTH = 260, SCORE_BOARD_HEIGHT = 160, EXIT_WIDTH =80, EXIT_HEIGHT =20,
+            START_GOAL_SPEED=19,REDUCE_SPEED=3,MAX_SPEED=4,GOAL_IN_GAME = 10;
 
     private Player player;
     private Stadium stadium;
@@ -13,17 +13,19 @@ public class GameScene extends JPanel {
     private ScoreBoard scoreBoard;
     private JButton exit;
     private boolean run;
-    private JButton gameOver;
+    private JButton menuNewGame;
+    private JButton menuGameRule;
     private int goalSpeed;
 
 
-    public GameScene(int x, int y, int width, int height,JButton main) {
+    public GameScene(int x, int y, int width, int height,JButton menuNewGame,JButton menuGameRule) {
         this.setBackground(Color.green);
         this.setLayout(null);
         this.setBounds(x, y, width, height);
         this.setDoubleBuffered(true);
         this.run=true;
-        this.gameOver=main;
+        this.menuNewGame =menuNewGame;
+        this.menuGameRule=menuGameRule;
         this.goalSpeed=START_GOAL_SPEED;
         this.scoreBoard=new ScoreBoard(x+Stadium.BOUND_X,Stadium.BOUND_Y+Stadium.BOUND_HEIGHT-SCORE_BOARD_HEIGHT,SCORE_BOARD_WIDTH,SCORE_BOARD_HEIGHT);
         this.add(this.scoreBoard);
@@ -32,14 +34,9 @@ public class GameScene extends JPanel {
         this.stadium = new Stadium();
         this.player = new Player(this.getX() + this.getWidth() / 2, this.getY() + this.getHeight() / 2);
         this.ball = new Ball(this.player.legsX(), this.player.legsY());
-       //this.stadium.goalMovement(this.ball);
-        this.exit =new JButton("Exit");
-        this.exit.setBounds(Stadium.BOUND_X+Stadium.BOUND_WIDTH-RESTART_WIDTH,Stadium.BOUND_Y+Stadium.BOUND_HEIGHT-RESTART_HEIGHT,RESTART_WIDTH,RESTART_HEIGHT);
-        this.add(this.exit);
+        this.exit=addButton(null,"Exit",Stadium.BOUND_X+Stadium.BOUND_WIDTH- EXIT_WIDTH,Stadium.BOUND_Y+Stadium.BOUND_HEIGHT- EXIT_HEIGHT, EXIT_WIDTH, EXIT_HEIGHT);
         this.exit.addActionListener((event)->{
             this.gameOver();
-
-
         });
 
         this.goalMovement();
@@ -147,6 +144,14 @@ public class GameScene extends JPanel {
     private boolean reachLeftBound(int objectLocation){
         return objectLocation == Stadium.BOUND_X;
     }
+    private JButton addButton(Font font, String buttonText,int x,int y,int width,int height){
+        JButton button=new JButton(buttonText);
+        button.setFont(font);
+        button.setBounds(x,y,width,height);
+        button.setVisible(true);
+        this.add(button);
+        return button;
+    }
 
     public void keyControl() {
         KeyControl keyControl = new KeyControl(this.player, this.ball);
@@ -160,7 +165,8 @@ public class GameScene extends JPanel {
         this.setVisible(false);
         this.scoreBoard.setVisible(false);
         this.stadium.setVisible(false);
-        this.gameOver.setVisible(true);
+        this.menuNewGame.setVisible(true);
+        this.menuGameRule.setVisible(true);
     }
 
     public void paintComponent(Graphics g) {
