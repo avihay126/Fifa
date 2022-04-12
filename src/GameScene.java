@@ -54,7 +54,7 @@ public class GameScene extends JPanel {
     private void goalMovement(){
         Thread t2=new Thread(()->{
             boolean goalMovement = true;
-            while (true) {
+            while (this.run) {
                 if (goalMovement) {
                     this.stadium.goalMoveRight();
                 } else {
@@ -66,11 +66,13 @@ public class GameScene extends JPanel {
                     goalMovement = true;
                 }
                 if (this.ball.getYLocation()==this.stadium.getBoundY()&&
-                        (this.ball.getXLocation()>this.stadium.getGoalX()&&ball.getXLocation()<this.stadium.getGoalX()+this.stadium.getGoalWidth())){
+                        (this.ball.getXLocation()>this.stadium.getGoalX()&&this.ball.getXLocation()<this.stadium.getGoalX()+this.stadium.getGoalWidth())){
                     if (this.goalSpeed>REDUCE_SPEED){
                         this.goalSpeed-=REDUCE_SPEED;
+                        System.out.println(this.goalSpeed);
                     }else {
                         this.goalSpeed=MAX_SPEED;
+                        System.out.println(this.goalSpeed);
                     }
                 }
                 try {
@@ -93,7 +95,7 @@ public class GameScene extends JPanel {
             keyControl();
             boolean shoot = false;
 
-            while (run) {
+            while (this.run) {
                 switch (this.player.getDirection()) {
                     case Player.RIGHT:
                         this.player.moveRight();
@@ -118,7 +120,8 @@ public class GameScene extends JPanel {
                     shoot = false;
                     this.ball.setDirection(Ball.NONE);
                 }
-                if (this.ball.getYLocation() == this.stadium.getBoundY() && (this.ball.getXLocation() > this.stadium.getGoalX() && this.ball.getXLocation() < this.stadium.getGoalX() + this.stadium.getGoalWidth())) {
+                if (this.ball.getYLocation() == this.stadium.getBoundY() &&
+                        (this.ball.getXLocation() > this.stadium.getGoalX() && this.ball.getXLocation() < this.stadium.getGoalX() + this.stadium.getGoalWidth())) {
                     System.out.println("goal");
                     this.scoreBoard.addGoal();
 

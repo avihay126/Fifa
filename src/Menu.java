@@ -16,17 +16,7 @@ public class Menu extends JPanel {
         Font font = new Font("Ariel", Font.BOLD, 20);
         this.newGame=addButton(font,"New Game",this.getWidth() / 2 - BUTTON_WIDTH / 2, (int) (this.getHeight() - BUTTON_HEIGHT * 4.8), BUTTON_WIDTH, BUTTON_HEIGHT);
         this.rulesOfGame=addButton(font,"Game Rules",this.getWidth() / 2 - BUTTON_WIDTH / 2, (int) (this.getHeight() - BUTTON_HEIGHT * 3.8), BUTTON_WIDTH, BUTTON_HEIGHT);
-
-        this.newGame.addActionListener((event) -> {
-            unVisibleButton();
-            GameScene gameScene = new GameScene(0, 0, width, height, this.newGame);
-            this.add(gameScene);
-        });
-        this.rulesOfGame.addActionListener((event) -> {
-            unVisibleButton();
-            Rules rules = new Rules(x, y, width, height);
-            this.add(rules);
-        });
+        buttonsListener();
         this.setDoubleBuffered(true);
         this.setVisible(true);
     }
@@ -34,6 +24,19 @@ public class Menu extends JPanel {
     private void unVisibleButton() {
         this.newGame.setVisible(false);
         this.rulesOfGame.setVisible(false);
+
+    }
+    private void buttonsListener(){
+        this.newGame.addActionListener((event) -> {
+            unVisibleButton();
+            GameScene gameScene = new GameScene(0, 0, this.getWidth(), this.getHeight(), this.newGame);
+            this.add(gameScene);
+        });
+        this.rulesOfGame.addActionListener((event) -> {
+            unVisibleButton();
+            Rules rules = new Rules(this.getX(),this.getY(),this.getWidth(),this.getHeight());
+            this.add(rules);
+        });
     }
 
     private JButton addButton(Font font, String buttonText,int x,int y,int width,int height){
