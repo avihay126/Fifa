@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="Shai:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Shai_jar</output-path>
+    <root id="archive" name="Shai.jar">
+      <element id="module-output" name="Shai" />
+    </root>
+  </artifact>
+</component>
