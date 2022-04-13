@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Rules extends JPanel {
-    public static final int EXIT_WIDTH =100, EXIT_HEIGHT =50;
+    public static final int EXIT_WIDTH =100, EXIT_HEIGHT =50,SIZE_FONT=30;
 
     private JLabel rules;
     private JButton exit;
@@ -11,7 +11,7 @@ public class Rules extends JPanel {
         this.setLayout(null);
         this.setBounds(x, y, width, height);
         this.setBackground(Color.lightGray);
-        Font font = new Font("Ariel", Font.BOLD, 30);
+        Font font = new Font("Ariel", Font.BOLD, SIZE_FONT);
         this.rules = new JLabel("<html>Welcome to " +
                 " The fast gate!<br/>" +
                 "Game rules:<br/>" +

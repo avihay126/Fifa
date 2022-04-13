@@ -31,9 +31,7 @@ public class KeyControl implements KeyListener {
         }
     }
 
-
     public void keyReleased(KeyEvent e) {
-
 
     }
 }

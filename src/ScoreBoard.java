@@ -2,7 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class ScoreBoard extends JPanel {
-    public static final int LINE_DIFFERENCE=40, PARAMETER_WIDTH=80,PARAMETER_HEIGHT=60, PRINT_START_X=5;
+    public static final int LINE_DIFFERENCE=40, PARAMETER_WIDTH=80,PARAMETER_HEIGHT=60, PRINT_START_X=5,
+    SIZE_FONT1=25,SIZE_FONT2=20 ,X_TITLE=40, Y_TITLE=0, WIDTH_TITLE=180,HEIGHT_TITLE=60;
 
     private int goals;
     private int fault;
@@ -18,11 +19,11 @@ public class ScoreBoard extends JPanel {
         this.setBounds(x, y, width, height);
         this.setBackground(Color.gray);
         this.fault=3;
-        Font font=new Font("Ariel",Font.BOLD,25);
-        Font font2=new Font("Ariel",Font.BOLD,20);
+        Font font=new Font("Ariel",Font.BOLD,SIZE_FONT1);
+        Font font2=new Font("Ariel",Font.BOLD,SIZE_FONT2);
         JLabel title=new JLabel("Score Board:");
 
-        title.setBounds(40,0,180,60);
+        title.setBounds(X_TITLE,Y_TITLE,WIDTH_TITLE,HEIGHT_TITLE);
         title.setForeground(Color.black);
         title.setFont(font);
         this.add(title);

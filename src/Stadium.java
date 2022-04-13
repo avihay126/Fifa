@@ -7,10 +7,12 @@ public class Stadium extends JPanel {
     public static final int BOUND_X = 20, BOUND_Y = 80, BOUND_WIDTH = 850, BOUND_HEIGHT = 570,
             KEEPER_WIDTH = 200, KEEPER_HEIGHT = 80, KEEPER_MARGIN = 90, OVAL_16_HEIGHT = 100, OVAL_16_MARGIN = 20, HALF_OVAL_HEIGHT = 200,
             CORNER_WIDTH = 10, GOAL_MARGIN = 25,WIDTH_FLAG = 20, HEIGHT_FLAG = 40, BOUND_Y_FLAG = BOUND_Y-(WIDTH_FLAG)*2,START_GOAL_SPEED=20,
-            CORNER_START_ANGLE=90,CORNER_END_ANGLE=270, OVAL_START =0, OVAL_END =180,PENALTY_SIZE=4;
+            CORNER_START_ANGLE=90,CORNER_END_ANGLE=270, OVAL_START =0, OVAL_END =180,PENALTY_SIZE=4,CROWD_X=0,CROWD_Y=0,WIDTH_CROWD=900,
+    HEIGHT_CROWD=42;
     private Rectangle bounds;
     private Rectangle goalKeeper;
     private Rectangle plaza16;
+
     private Oval oval16;
     private Oval halfOval;
     private Oval elevenPoint;
@@ -101,6 +103,6 @@ public class Stadium extends JPanel {
 
         graphics.drawImage(rightFlag.getImage(), BOUND_X, BOUND_Y_FLAG, WIDTH_FLAG, HEIGHT_FLAG, null);
         graphics.drawImage(leftFlag.getImage(), BOUND_WIDTH , BOUND_Y_FLAG, WIDTH_FLAG, HEIGHT_FLAG, null);
-        graphics.drawImage(CrowdAshkelon.getImage(), 0,0,900,42,null);
+        graphics.drawImage(CrowdAshkelon.getImage(), CROWD_X,CROWD_Y,WIDTH_CROWD,HEIGHT_CROWD,null);
     }
 }

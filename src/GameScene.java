@@ -4,7 +4,8 @@ import java.awt.*;
 public class GameScene extends JPanel {
 
     public static final int GAME_SPEED = 6, SCORE_BOARD_WIDTH = 260, SCORE_BOARD_HEIGHT = 160, EXIT_WIDTH =80, EXIT_HEIGHT =20,
-            START_GOAL_SPEED=19,REDUCE_SPEED=3,MAX_SPEED=4,GOAL_IN_GAME = 10,END_LABEL_WIDTH=350,END_LABEL_HEIGHT=140;
+            START_GOAL_SPEED=19,REDUCE_SPEED=3,MAX_SPEED=4,GOAL_IN_GAME = 10,END_LABEL_WIDTH=350,END_LABEL_HEIGHT=140,
+    SIZE_FONT=70;
 
     private Player player;
     private Stadium stadium;
@@ -27,7 +28,7 @@ public class GameScene extends JPanel {
         this.setBounds(x, y, width, height);
         this.setDoubleBuffered(true);
         this.run=true;
-        this.endLabelFont=new Font("Ariel",Font.ITALIC,70);
+        this.endLabelFont=new Font("Ariel",Font.ITALIC,SIZE_FONT);
         this.menuNewGame =menuNewGame;
         this.menuGameRule=menuGameRule;
         this.goalSpeed=START_GOAL_SPEED;
@@ -126,7 +127,7 @@ public class GameScene extends JPanel {
 
 
                 }else if (this.scoreBoard.getFault()==0){
-                    this.looser=addLabel(this.endLabelFont,"out of life !!",Color.red,this.getWidth()/2-END_LABEL_WIDTH/2,this.getHeight()/3-END_LABEL_HEIGHT/2,END_LABEL_WIDTH,END_LABEL_HEIGHT);
+                    this.looser=addLabel(this.endLabelFont,"you lose !!",Color.red,this.getWidth()/2-END_LABEL_WIDTH/2,this.getHeight()/3-END_LABEL_HEIGHT/2,END_LABEL_WIDTH,END_LABEL_HEIGHT);
                     this.backSound.backSound("end_game_whistle.wav");
                     gameFinished();
                     System.out.println("game over");

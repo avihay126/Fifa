@@ -1,7 +1,7 @@
 import java.awt.*;
 
 public class Ball {
-    public static final int NONE=0,UP=1;
+    public static final int NONE=0,UP=1,END_ANGLE=360,WIDTH_OVAL=10, HEIGHT_OVAL=10;
 
     private Oval ball;
     private int direction;
@@ -9,7 +9,7 @@ public class Ball {
 
 
     public Ball(int x, int y) {
-        this.ball = new Oval(x, y, 10, 10, 0, 360, Color.black, true);
+        this.ball = new Oval(x, y, WIDTH_OVAL, HEIGHT_OVAL, 0, END_ANGLE, Color.black, true);
         this.direction =NONE;
 
     }

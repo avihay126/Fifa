@@ -3,7 +3,7 @@ import java.awt.*;
 
 public class Menu extends JPanel {
 
-    public static final int BUTTON_WIDTH = 150, BUTTON_HEIGHT = 50;
+    public static final int BUTTON_WIDTH = 150, BUTTON_HEIGHT = 50, SIZE_FONT= 20;
 
     private ImageIcon backGround;
     private JButton newGame;
@@ -13,7 +13,7 @@ public class Menu extends JPanel {
         this.setBounds(x, y, width, height);
         this.setLayout(null);
         this.backGround = new ImageIcon("the fast gate wind.png");
-        Font font = new Font("Ariel", Font.BOLD, 20);
+        Font font = new Font("Ariel", Font.BOLD, SIZE_FONT);
         this.newGame=addButton(font,"New Game",this.getWidth() / 2 - BUTTON_WIDTH / 2, (int) (this.getHeight() - BUTTON_HEIGHT * 4.8), BUTTON_WIDTH, BUTTON_HEIGHT);
         this.rulesOfGame=addButton(font,"Game Rules",this.getWidth() / 2 - BUTTON_WIDTH / 2, (int) (this.getHeight() - BUTTON_HEIGHT * 3.8), BUTTON_WIDTH, BUTTON_HEIGHT);
         buttonsListener();
