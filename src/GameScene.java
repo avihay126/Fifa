@@ -126,7 +126,7 @@ public class GameScene extends JPanel {
 
 
                 }else if (this.scoreBoard.getFault()==0){
-                    this.looser=addLabel(this.endLabelFont,"!! Loser !!",Color.red,this.getWidth()/2-END_LABEL_WIDTH/2,this.getHeight()/3-END_LABEL_HEIGHT/2,END_LABEL_WIDTH,END_LABEL_HEIGHT);
+                    this.looser=addLabel(this.endLabelFont,"out of life !!",Color.red,this.getWidth()/2-END_LABEL_WIDTH/2,this.getHeight()/3-END_LABEL_HEIGHT/2,END_LABEL_WIDTH,END_LABEL_HEIGHT);
                     this.backSound.backSound("end_game_whistle.wav");
                     gameFinished();
                     System.out.println("game over");
