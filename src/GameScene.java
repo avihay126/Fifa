@@ -101,7 +101,7 @@ public class GameScene extends JPanel {
                     shoot = true;
                     this.ball.goUp();
                     if (ball.getYLocation() == this.player.legsY() - 1) {
-                        backSound.backSound("kick.wav");
+                        this.backSound.backSound("kick.wav");
                     }
                 }
                 if (this.ball.getYLocation() == this.stadium.getBoundY() - BEHIND_THE_LINE) {
@@ -120,7 +120,7 @@ public class GameScene extends JPanel {
                     this.scoreBoard.lessFault();
                 }
                 if (this.scoreBoard.getGoals() == GOAL_IN_GAME) {
-                    this.winner = addLabel(this.endLabelFont, "!! Winner !!", Color.blue, this.getWidth() / 2 - END_LABEL_WIDTH / 2, this.getHeight() / 3 - END_LABEL_HEIGHT / 2, END_LABEL_WIDTH, END_LABEL_HEIGHT);
+                    this.winner = Helper.addLabel(this,this.endLabelFont, "!! Winner !!", Color.blue, this.getWidth() / 2 - END_LABEL_WIDTH / 2, this.getHeight() / 3 - END_LABEL_HEIGHT / 2, END_LABEL_WIDTH, END_LABEL_HEIGHT);
                     this.backSound.backSound("victory.wav");
                     gameFinished();
 
@@ -128,7 +128,7 @@ public class GameScene extends JPanel {
 
 
                 } else if (this.scoreBoard.getFault() == LOSE) {
-                    this.looser = addLabel(this.endLabelFont, "you lose !!", Color.red, this.getWidth() / 2 - END_LABEL_WIDTH / 2, this.getHeight() / 3 - END_LABEL_HEIGHT / 2, END_LABEL_WIDTH, END_LABEL_HEIGHT);
+                    this.looser = Helper.addLabel(this,this.endLabelFont, "you lose !!", Color.red, this.getWidth() / 2 - END_LABEL_WIDTH / 2, this.getHeight() / 3 - END_LABEL_HEIGHT / 2, END_LABEL_WIDTH, END_LABEL_HEIGHT);
                     this.backSound.backSound("end_game_whistle.wav");
                     gameFinished();
                     System.out.println("game over");
@@ -164,25 +164,6 @@ public class GameScene extends JPanel {
 
     private boolean reachLeftBound(int objectLocation) {
         return objectLocation == Stadium.BOUND_X;
-    }
-
-    private JButton addButton(Font font, String buttonText, int x, int y, int width, int height) {
-        JButton button = new JButton(buttonText);
-        button.setFont(font);
-        button.setBounds(x, y, width, height);
-        button.setVisible(true);
-        this.add(button);
-        return button;
-    }
-
-    private JLabel addLabel(Font font, String labelText, Color color, int x, int y, int width, int height) {
-        JLabel label = new JLabel(labelText);
-        label.setForeground(color);
-        label.setFont(font);
-        label.setBounds(x, y, width, height);
-        this.add(label);
-        return label;
-
     }
 
     public void keyControl() {
