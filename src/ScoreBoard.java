@@ -19,27 +19,18 @@ public class ScoreBoard extends JPanel {
         this.fault = OPPORTUNITIES;
         Font titleFont = new Font("Ariel", Font.BOLD, TITLE_SIZE);
         Font contentFont = new Font("Ariel", Font.BOLD, CONTENT_SIZE);
-        this.title = addLabel(titleFont, "Score Board:", Color.black, X_TITLE, Y_TITLE, WIDTH_TITLE, HEIGHT_TITLE);
+        this.title = Helper.addLabel(this,titleFont, "Score Board:", Color.black, X_TITLE, Y_TITLE, WIDTH_TITLE, HEIGHT_TITLE);
         JLabel goalsLabel;
-        goalsLabel = addLabel(contentFont, "Goals:", Color.black, PRINT_START_X, LINE_DIFFERENCE, PARAMETER_WIDTH, PARAMETER_HEIGHT);
+        goalsLabel = Helper.addLabel(this,contentFont, "Goals:", Color.black, PRINT_START_X, LINE_DIFFERENCE, PARAMETER_WIDTH, PARAMETER_HEIGHT);
         JLabel faultLabel;
-        faultLabel = addLabel(contentFont, "Fault:", Color.black, PRINT_START_X, LINE_DIFFERENCE * 2, PARAMETER_WIDTH, PARAMETER_HEIGHT);
-        this.goalScore = addLabel(contentFont, String.valueOf(this.goals), Color.black, PARAMETER_WIDTH, LINE_DIFFERENCE, PARAMETER_WIDTH, PARAMETER_HEIGHT);
-        this.faultScore = addLabel(contentFont, String.valueOf(this.fault), Color.black, PARAMETER_WIDTH, LINE_DIFFERENCE * 2, PARAMETER_WIDTH, PARAMETER_HEIGHT);
+        faultLabel = Helper.addLabel(this,contentFont, "Fault:", Color.black, PRINT_START_X, LINE_DIFFERENCE * 2, PARAMETER_WIDTH, PARAMETER_HEIGHT);
+        this.goalScore = Helper.addLabel(this,contentFont, String.valueOf(this.goals), Color.black, PARAMETER_WIDTH, LINE_DIFFERENCE, PARAMETER_WIDTH, PARAMETER_HEIGHT);
+        this.faultScore = Helper.addLabel(this,contentFont, String.valueOf(this.fault), Color.black, PARAMETER_WIDTH, LINE_DIFFERENCE * 2, PARAMETER_WIDTH, PARAMETER_HEIGHT);
 
         this.setDoubleBuffered(true);
         this.setVisible(true);
     }
 
-    private JLabel addLabel(Font font, String labelText, Color color, int x, int y, int width, int height) {
-        JLabel label = new JLabel(labelText);
-        label.setForeground(color);
-        label.setFont(font);
-        label.setBounds(x, y, width, height);
-        this.add(label);
-        return label;
-
-    }
 
     public void paintComponent(Graphics graphics) {
         super.paintComponent(graphics);

@@ -12,7 +12,7 @@ public class Rules extends JPanel {
         this.setBounds(x, y, width, height);
         this.setBackground(Color.lightGray);
         Font font = new Font("Ariel", Font.BOLD, SIZE_FONT);
-        this.rules = new JLabel("<html>Welcome to " +
+        this.rules=Helper.addLabel(this,font,"<html>Welcome to " +
                 " The fast gate!<br/>" +
                 "Game rules:<br/>" +
                 "1. Active buttons in the game are:<br/>" +
@@ -20,14 +20,11 @@ public class Rules extends JPanel {
                 "2. You have to score " + GameScene.GOAL_IN_GAME + " goals to win.<br/>" +
                 "3. Pay attention! You have 3 disqualifications, each miss is considered a disqualification.<br/>" +
                 "4. After each goal the speed of the goal increases, get ready!" + "\n" +
-                "5. We recommend playing with sound<br/>" +
-                "good luck!<html>");
-        this.rules.setBounds(x, y, width, height);
-        this.rules.setFont(font);
-        this.add(this.rules);
+                "5. We recommend playing with sound.<br/>" +
+                "good luck!<html>",Color.black,x, y, width, height);
         this.setDoubleBuffered(true);
         this.setVisible(true);
-        this.exit = addButton(font, "Exit", this.getWidth() / 2 - EXIT_WIDTH / 2, Stadium.BOUND_Y + Stadium.BOUND_HEIGHT - EXIT_HEIGHT, EXIT_WIDTH, EXIT_HEIGHT);
+        this.exit = Helper.addButton(this,font, "Exit", this.getWidth() / 2 - EXIT_WIDTH / 2, Stadium.BOUND_Y + Stadium.BOUND_HEIGHT - EXIT_HEIGHT, EXIT_WIDTH, EXIT_HEIGHT);
         this.exit.addActionListener((event) -> {
             this.setVisible(false);
             this.exit.setVisible(false);
@@ -36,12 +33,4 @@ public class Rules extends JPanel {
         });
     }
 
-    private JButton addButton(Font font, String buttonText, int x, int y, int width, int height) {
-        JButton button = new JButton(buttonText);
-        button.setFont(font);
-        button.setBounds(x, y, width, height);
-        button.setVisible(true);
-        this.add(button);
-        return button;
-    }
 }
