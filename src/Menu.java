@@ -41,6 +41,15 @@ public class Menu extends JPanel {
         });
     }
 
+    private JButton addButton(Font font, String buttonText, int x, int y, int width, int height) {
+        JButton button = new JButton(buttonText);
+        button.setFont(font);
+        button.setBounds(x, y, width, height);
+        button.setVisible(true);
+        this.add(button);
+        return button;
+    }
+
     public void paintComponent(Graphics graphics) {
         super.paintComponent(graphics);
         graphics.drawImage(this.backGround.getImage(), this.getX(), this.getY(), this.getWidth(), this.getHeight(), null);
