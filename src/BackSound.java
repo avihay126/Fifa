@@ -1,10 +1,8 @@
 import javax.sound.sampled.*;
 import java.io.File;
-import java.io.IOException;
 
 
 public class BackSound {
-
 
     public void backSound(String sound) {
         try {
@@ -15,7 +13,6 @@ public class BackSound {
         } catch (Exception e) {
             System.out.println("sound doesn't work");
         }
-        //TODO: add loop to sound
 
     }
 
