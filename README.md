@@ -7,6 +7,10 @@ The project is written in Java using the Swing library, with a focus on Object-O
 
 Additionally, threads are used to manage the movement of the player, ball, and goal without any interference between actions.
 
+
+![Game Screenshot](fifa_screenshot.png)
+
+
 ## System Requirements
 - Java 8 or higher
 - Swing library (included in JDK)
@@ -23,4 +27,6 @@ Additionally, threads are used to manage the movement of the player, ball, and g
 
 ### Game Objective
 The objective is to score 10 goals. Each time the player scores a goal, the player’s speed increases. The player can fail up to 3 times, after which the game will restart from the beginning.
+
+
 
